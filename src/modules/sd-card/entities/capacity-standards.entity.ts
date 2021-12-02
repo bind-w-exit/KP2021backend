@@ -13,8 +13,8 @@ export class CapacityStandart {
   @Column()
   description: string;
 
-  //@Column()
-  //logo: number;
+  @Column()
+  logo: string;
 
   @Column()
   min_capacity: number;

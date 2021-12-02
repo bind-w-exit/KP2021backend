@@ -11,8 +11,8 @@ export class SDCard {
   @Column()
   description: string;
 
-  //@Column()
-  //img: number;
+  @Column()
+  img: string;
 
   @Column()
   width: number;
