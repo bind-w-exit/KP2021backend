@@ -3,7 +3,7 @@ import { SDCard } from './sd-card.entity';
 
 
 @Entity()
-export class CapacityStandart {
+export class CapacityStandard {
   @PrimaryGeneratedColumn()
   id: number;
 
