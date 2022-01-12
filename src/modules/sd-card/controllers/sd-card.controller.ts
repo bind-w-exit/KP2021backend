@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { SDCard } from '../entities/sd-card.entity';
-import { SDCardsService } from '../services/sd-card.service';
+import { SDCardService } from '../services/sd-card.service';
 
 
 @Controller('rest/SDCard')
 export class SDCardController {
-  constructor(private readonly sdCardService: SDCardsService) {
+  constructor(private readonly sdCardService: SDCardService) {
   }
   @Get()
   getAllAction(): Promise<SDCard[]> {
@@ -17,21 +17,12 @@ export class SDCardController {
     return this.sdCardService.findOne(id);
   }
 
-  // @Post()
-  // saveAction(@Body() sdCardDto: SDCard): Promise<SDCard>{
-  //   // delete sdCard.id;
-  //   const sdCard = new SDCard();
-  //   sdCard.id = sdCardDto.id;
-  //   sdCard.name = sdCardDto.name;
-  //   sdCard.description = sdCardDto.description;
-  //   sdCard.img = sdCardDto.img;
-  //   sdCard.width = sdCardDto.width;
-  //   sdCard.height = sdCardDto.height;
-  //   sdCard.thickness = sdCardDto.thickness;
-  //   sdCard.pins = sdCardDto.pins;
-  //   console.log(sdCard);
-  //   return this.sdCardService.save(sdCard);
-  // }
+  @Post()
+  saveAction(@Body() sdCard: SDCard): Promise<SDCard>{
+    delete sdCard.id;
+    console.log(sdCard);
+    return this.sdCardService.save(sdCard);
+  }
 
   @Delete(':id')
   deleteAction(@Param('id') id: string): Promise<void>{

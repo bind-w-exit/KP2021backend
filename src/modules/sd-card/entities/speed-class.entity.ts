@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { SDCard } from './sd-card.entity';
+
 
 @Entity()
 export class SpeedClass {
@@ -7,22 +7,29 @@ export class SpeedClass {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   name: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   description: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   logo: string;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   minWriteSpeed: number;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   maxWriteSpeed: number;
-
-  // @OneToMany(() => SDCard, sdCard => sdCard.capacityTypeAndFormFactor)
-  // sdCard: SDCard[];
 
 }

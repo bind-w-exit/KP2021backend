@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { SDCard } from '../entities/sd-card.entity';
 
 @Injectable()
-export class SDCardsService {
+export class SDCardService {
   constructor(
     @InjectRepository(SDCard)
     private sdCardsRepository: Repository<SDCard>,

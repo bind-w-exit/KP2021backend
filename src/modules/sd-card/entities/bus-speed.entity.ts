@@ -7,22 +7,34 @@ export class BusSpeed {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   name: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   description: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   logo: string;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   speed: number;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   duplex: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   specVersion: string;
 
   @OneToMany(() => SDCard, sdCard => sdCard.capacityTypeAndFormFactor)

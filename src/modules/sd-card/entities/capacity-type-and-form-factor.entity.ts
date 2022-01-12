@@ -7,31 +7,52 @@ export class CapacityTypeAndFormFactor {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   name: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   description: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   logo: string;
 
-  @Column("decimal")
+  @Column({
+    type: "decimal",
+    nullable: false
+  })
   width: number;
 
-  @Column("decimal")
+  @Column({
+    type: "decimal",
+    nullable: false
+  })
   length: number;
 
-  @Column("decimal")
+  @Column({
+    type: "decimal",
+    nullable: false
+  })
   thicknes: number;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   minCapacity: number;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   maxCapacity: number;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   typicalFs: string;
 
   @OneToMany(() => SDCard, sdCard => sdCard.capacityTypeAndFormFactor)

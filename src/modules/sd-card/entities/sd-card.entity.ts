@@ -9,25 +9,39 @@ export class SDCard {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   name: string;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   brand: string;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   img: string;
 
-  @Column()
+  @Column({
+    nullable: false
+  })
   storageCapacity: number;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   readSpeed: number;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   writeSpeed: number;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   marking: string;
 
   @ManyToOne(() => CapacityTypeAndFormFactor, capacityTypeAndFormFactor => capacityTypeAndFormFactor.sdCard)
@@ -35,9 +49,6 @@ export class SDCard {
 
   @ManyToOne(() => BusSpeed, busSpeed => busSpeed.sdCard)
   busSpeed: BusSpeed;
-
-  // @ManyToOne(() => SpeedClass, speedClass => speedClass.sdCard)
-  // speedClass: SpeedClass;
 
   @ManyToMany(() => SpeedClass)
   @JoinTable()
