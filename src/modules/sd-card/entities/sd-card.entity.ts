@@ -1,7 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
+import { BusSpeed } from './bus-speed.entity';
+import { CapacityTypeAndFormFactor } from './capacity-type-and-form-factor.entity';
+import { SpeedClass } from './speed-class.entity';
 
 @Entity()
 export class SDCard {
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -9,20 +13,34 @@ export class SDCard {
   name: string;
 
   @Column()
-  description: string;
+  brand: string;
 
   @Column()
   img: string;
 
   @Column()
-  width: number;
+  storageCapacity: number;
 
   @Column()
-  height: number;
+  readSpeed: number;
 
   @Column()
-  thickness: number;
+  writeSpeed: number;
 
   @Column()
-  pins: number;
+  marking: string;
+
+  @ManyToOne(() => CapacityTypeAndFormFactor, capacityTypeAndFormFactor => capacityTypeAndFormFactor.sdCard)
+  capacityTypeAndFormFactor: CapacityTypeAndFormFactor;
+
+  @ManyToOne(() => BusSpeed, busSpeed => busSpeed.sdCard)
+  busSpeed: BusSpeed;
+
+  // @ManyToOne(() => SpeedClass, speedClass => speedClass.sdCard)
+  // speedClass: SpeedClass;
+
+  @ManyToMany(() => SpeedClass)
+  @JoinTable()
+  speedClasses: SpeedClass[];
+
 }
