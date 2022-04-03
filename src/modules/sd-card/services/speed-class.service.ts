@@ -1,25 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateSpeedClassDto } from '../dto/create-speed-class.dto';
+import { UpdateSpeedClassDto } from '../dto/update-speed-class-dto';
 import { SpeedClass } from '../entities/speed-class.entity';
 
 @Injectable()
 export class SpeedClassService {
+  
   constructor(
     @InjectRepository(SpeedClass)
     private speedClassRepository: Repository<SpeedClass>,
   ) {}
 
-  findAll(): Promise<SpeedClass[]> {
+  async findAll(): Promise<SpeedClass[]> {
     return this.speedClassRepository.find();
   }
 
-  findOne(id: string): Promise<SpeedClass> {
+  async findOne(id: string): Promise<SpeedClass> {
     return this.speedClassRepository.findOne(id);
   }
 
-  save(speedClass: SpeedClass): Promise<SpeedClass> {
-    return this.speedClassRepository.save(speedClass);
+  async create(createSpeedClassDto: CreateSpeedClassDto): Promise<SpeedClass> {
+    return this.speedClassRepository.save(createSpeedClassDto);
+  }
+
+  async update(id: string, updateSpeedClassDto: UpdateSpeedClassDto) {
+    const entity = await this.speedClassRepository.findOne(id)
+    if (entity) {
+      entity.name = updateSpeedClassDto.name;
+      entity.description = updateSpeedClassDto.description;
+      entity.logo = updateSpeedClassDto.logo;
+      entity.minWriteSpeed = updateSpeedClassDto.minWriteSpeed;
+
+      return await this.speedClassRepository.save(entity);
+    }
   }
 
   async remove(id: string): Promise<void> {

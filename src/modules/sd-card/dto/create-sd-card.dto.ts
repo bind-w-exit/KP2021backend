@@ -1,24 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
-import { CapacityTypeAndFormFactor } from './capacity-type-and-form-factor.entity';
-import { SpeedClass } from './speed-class.entity';
+import { CapacityTypeAndFormFactor } from '../entities/capacity-type-and-form-factor.entity';
+import { SpeedClass } from '../entities/speed-class.entity';
 
-@Entity()
-export class SDCard {
-
+export class CreateSDCardDto {
+  
   @ApiProperty({
     description: 'SD card id',
     example: 1
   })
-  @PrimaryGeneratedColumn()
   id: number;
 
   @ApiProperty({
     description: 'SD card name',
     example: 'EVO Plus'
-  })
-  @Column({
-    nullable: false
   })
   name: string;
 
@@ -26,17 +20,11 @@ export class SDCard {
     description: 'SD card brand name',
     example: 'Samsung'
   })
-  @Column({
-    nullable: false
-  })
   brand: string;
 
   @ApiProperty({
     description: 'SD card image',
-    example: 'src://samsung.png'
-  })
-  @Column({
-    nullable: false
+    example: 'src:/samsung.png'
   })
   img: string;
 
@@ -44,17 +32,11 @@ export class SDCard {
     description: 'SD card storage capacity (GB)',
     example: 32
   })
-  @Column({
-    nullable: false
-  })
   storageCapacity: number;
 
   @ApiProperty({
     description: 'SD card read speed (MB/s)',
     example: 100
-  })
-  @Column({
-    nullable: true
   })
   readSpeed: number;
 
@@ -62,25 +44,22 @@ export class SDCard {
     description: 'SD card write speed (MB/s)',
     example: 90
   })
-  @Column({
-    nullable: true
-  })
   writeSpeed: number;
 
   @ApiProperty({
     description: 'SD card marking',
     example: 'MB-MC256GA'
   })
-  @Column({
-    nullable: true
-  })
   marking: string;
 
-  @ManyToOne(() => CapacityTypeAndFormFactor, capacityTypeAndFormFactor => capacityTypeAndFormFactor.sdCard)
+  @ApiProperty({
+    description: 'capacityTypeAndFormFactor',
+  }) 
   capacityTypeAndFormFactor: CapacityTypeAndFormFactor;
 
-  @ManyToMany(() => SpeedClass)
-  @JoinTable()
+  @ApiProperty({
+    description: 'SD card speed classes',
+  })
   speedClasses: SpeedClass[];
 
 }
