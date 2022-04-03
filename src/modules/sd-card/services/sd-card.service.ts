@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { endianness } from 'os';
 import { Repository } from 'typeorm';
 import { CreateSDCardDto } from '../dto/create-sd-card.dto';
 import { UpdateSDCardDto } from '../dto/update-sd-card.dto';

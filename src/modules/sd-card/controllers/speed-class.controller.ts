@@ -37,7 +37,6 @@ export class SpeedClassController {
     return this.speedClassService.update(id, updateSpeedClassDto);
   }
 
-
   @Delete(':id')
   deleteAction(@Param('id') id: string): Promise<void>{
     return this.speedClassService.remove(id);
